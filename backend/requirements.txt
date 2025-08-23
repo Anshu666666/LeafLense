@@ -1,55 +1,23 @@
-# --- Web & API Framework ---
-fastapi==0.115.0
 uvicorn[standard]==0.30.6
 httpx==0.27.0
-aiohttp==3.8.4
-python-multipart==0.0.9
-
-# --- Data Handling & Core ML ---
 pydantic==2.8.2
+python-dotenv==1.0.1
+SQLAlchemy==2.0.32
+sqlmodel==0.0.21
+apscheduler==3.10.4
+firebase-admin==6.5.0
+requests==2.32.4
+aiohttp==3.8.4
 pandas==2.3.2
 numpy==2.3.2
 scikit-learn==1.7.1
 joblib==1.5.1
-SQLAlchemy==2.0.32
-sqlmodel==0.0.21
-
-# --- Deep Learning (CPU Optimized for Render) ---
-tensorflow-cpu
-# torch
-# torchvision
-# NOTE: If you need PyTorch, uncomment the two lines above and add the following
-# to your build command in Render: pip install -r requirements.txt --index-url https://download.pytorch.org/whl/cpu
-
-# --- Gradient Boosting Libraries ---
-xgboost
-lightgbm
-
-# --- Computer Vision ---
-Pillow==11.3.0
-opencv-python-headless
-
-# --- NLP & Transformer Libraries ---
-# IMPORTANT: These packages (especially transformers) often require a Rust compiler
-# that is not available in Render's default build environment. If your deploy fails,
-# you MUST switch your Render service to use a custom Dockerfile to proceed.
-google-generativeai
-transformers
-datasets
-sentence-transformers
-
-# --- Experiment Tracking & Visualization ---
-mlflow
-matplotlib
-seaborn
-
-# --- Utilities & File Parsing ---
-python-dotenv==1.0.1
-firebase-admin==6.5.0
-requests==2.32.4
-apscheduler==3.10.4
+python-multipart==0.0.9
 PyPDF2==3.0.1
 python-docx==1.1.2
+Pillow==11.3.0
 beautifulsoup4==4.13.4
+google-generativeai
+tensorflow
 langchain
 langchain-google-genai
