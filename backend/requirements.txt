@@ -18,6 +18,7 @@ PyPDF2==3.0.1
 python-docx==1.1.2
 Pillow==11.3.0
 beautifulsoup4==4.13.4
+google-generativeai
 # NOTE: LLM/advanced packages (langchain, tiktoken, tokenizers, google-generativeai, etc.)
 # were intentionally removed from this file because they pull Rust-based wheels or
 # large native extensions that fail to build in Render's read-only build environment.
