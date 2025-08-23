@@ -4,6 +4,7 @@ import joblib
 import pandas as pd
 import json
 import google.generativeai as genai
+from huggingface_hub import hf_hub_download
 import re
 import os
 
@@ -12,7 +13,13 @@ router = APIRouter()
 # ---------------------------
 # Load model + Gemini
 # ---------------------------
-model, columns = joblib.load(os.path.join(os.path.dirname(__file__), "fertilizer_model.pkl"))
+
+fertilizer_model_path = hf_hub_download(
+    repo_id="adityaarun1010/my-new-models",
+    filename="fertilizer_model.pkl"
+)
+
+model, columns = joblib.load(fertilizer_model_path)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  
 genai.configure(api_key=GEMINI_API_KEY)

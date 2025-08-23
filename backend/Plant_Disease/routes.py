@@ -4,6 +4,8 @@ from fastapi import APIRouter, UploadFile, File
 from fastapi.responses import JSONResponse
 from PIL import Image
 import io
+from tensorflow import keras
+from huggingface_hub import hf_hub_download
 # from langchain_google_genai import ChatGoogleGenerativeAI  # Temporarily disabled
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
@@ -56,16 +58,18 @@ class_names = [
 ]
 
 # ✅ Path to trained model
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "trained_model_savedmodel")
+keras_path = hf_hub_download(
+    repo_id="adityaarun1010/my-new-models",
+    filename="trained_model.keras"
+)
 
 # ✅ Load model with fallback to mock model for development
 try:
-    print(f"\n🔄 Loading model from: {MODEL_PATH}")
+    print(f"\n🔄 Loading model from: {keras_path}")
     
     # First try: tf.saved_model.load (works with Keras 3 for inference)
     try:
-        model = tf.saved_model.load(MODEL_PATH)
+        model = tf.saved_model.load(keras_path)
         print("\n✅ Model loaded successfully using tf.saved_model.load")
         print(f"📊 Model signatures: {list(model.signatures.keys())}")
         model_type = "saved_model"

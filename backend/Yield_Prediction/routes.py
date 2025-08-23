@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from fastapi import APIRouter
 from pydantic import BaseModel
+from huggingface_hub import hf_hub_download
 from fastapi.middleware.cors import CORSMiddleware
 
 # --- 1. Initialize FastAPI app ---
@@ -15,8 +16,17 @@ router = APIRouter()
 
 # Get the absolute path of the directory where this script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
-recommend_model_path = os.path.join(script_dir, 'saved_models', 'crop_recommend_model.pkl')
-yield_model_path = os.path.join(script_dir, 'saved_models', 'crop_yield_model.pkl')
+recommend_model_path = hf_hub_download(
+    repo_id="adityaarun1010/my-new-models",
+    filename="crop_recommend_model.pkl"
+)
+
+
+yield_model_path = hf_hub_download(
+    repo_id="adityaarun1010/my-new-models",
+    filename="crop_yield_model.pkl"
+)
+
 
 try:
     with open(recommend_model_path, 'rb') as file:
