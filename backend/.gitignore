@@ -34,7 +34,7 @@ venv.bak/
 
 # Environment variables
 .env
-
+serviceAccountKey.json
 # IDEs and editors
 .vscode/
 .idea/
