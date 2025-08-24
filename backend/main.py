@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 
 # Import routers
-from FarmAgent.routes import router as farm_router
+# from FarmAgent.routes import router as farm_router
 # from Plant_Disease.routes import router as plant_router  # Removed TensorFlow part
 from FertilizerSuggestor.routes import router as fert_router
 from Yield_Prediction.routes import router as yield_router
@@ -29,7 +29,7 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(farm_router, prefix="/farm", tags=["FarmAgent"])
+# app.include_router(farm_router, prefix="/farm", tags=["FarmAgent"])
 # app.include_router(plant_router, prefix="/plant", tags=["Plant_Disease"])  # TensorFlow removed
 app.include_router(fert_router, prefix="/fertilizer", tags=["FertilizerSuggestor"])
 app.include_router(yield_router, prefix="/yield", tags=["YieldPredictor"])
