@@ -19,7 +19,6 @@ python-docx==1.1.2
 Pillow==11.3.0
 beautifulsoup4==4.13.4
 google-generativeai
-tensorflow
 langchain-google-genai
 langchain
 huggingface_hub
