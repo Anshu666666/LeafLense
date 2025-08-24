@@ -1,22 +1,19 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 import os
 from dotenv import load_dotenv
 
-# --- ADD THIS BLOCK ---
-# Load environment variables from the .env file in the same directory
-load_dotenv() 
-# Add a debug print to confirm it's working
-print(f"DEBUG from main.py: PRIVATE_KEY has been loaded. Value starts with: {str(os.getenv('PRIVATE_KEY'))[:25]}...")
-# --- END BLOCK ---
+# Load environment variables (from .env inside backend/)
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
+
+# Debug print (remove later if not needed)
+print(f"DEBUG: PRIVATE_KEY starts with: {str(os.getenv('PRIVATE_KEY'))[:25]}...")
+
+# Import routers
 from FarmAgent.routes import router as farm_router
 from Plant_Disease.routes import router as plant_router
 from FertilizerSuggestor.routes import router as fert_router
 from Yield_Prediction.routes import router as yield_router
-
-# Load environment variables (from .env inside backend/)
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))
 
 # Create FastAPI app
 app = FastAPI(
@@ -44,10 +41,12 @@ app.include_router(yield_router, prefix="/yield", tags=["YieldPredictor"])
 def root():
     return {"message": "Unified Backend running successfully"}
 
+# Only for local development
 if __name__ == "__main__":
+    import uvicorn
     uvicorn.run(
-        "main:app",   # ✅ correct for backend/main.py
+        "main:app",   # ✅ correct since Render root is backend/
         host="0.0.0.0",
         port=int(os.getenv("PORT", 8000)),
-        reload=True
+        reload=not os.getenv("RENDER")  # ✅ reload locally, disabled on Render
     )
